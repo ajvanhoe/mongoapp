@@ -1,0 +1,40 @@
+html, body {
+    
+    color: #636b6f;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    height: 100vh;
+    margin: 0;
+
+/*
+        background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+         background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+*/
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.content {
+    text-align: center; 
+}
+
+.title {
+    font-size: 30px;
+}
+
+
+.m-b-md {
+    margin-bottom: 30px;
+}
