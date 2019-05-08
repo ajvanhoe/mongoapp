@@ -43,6 +43,10 @@ io.on("connection", function(socket) {
 
         }
 
+     socket.on("event", function(event){
+          console.log(event);
+          socket.emit("event", event);
+     });
 
 
     socket.on("input", async function(chat){
@@ -58,7 +62,7 @@ io.on("connection", function(socket) {
             });
         }
 
-         // handle user registration
+         // user registration
         if(msg.startsWith("register:")) {
           let pwd = msg.replace(/register:/g,'');
           // dodati hash
@@ -68,7 +72,7 @@ io.on("connection", function(socket) {
           // output message
              chat.created = new Date();
              let response = await new message(chat).save();
-             socket.emit("output", chat);
+             socket.emit("output", response);
 
             sendStatus({
               message:'Message sent',
@@ -80,10 +84,6 @@ io.on("connection", function(socket) {
 
     });
 
-
-    //message.find();
-    //console.log(message);
-    //socket.emit("output", message);
 
 });
 

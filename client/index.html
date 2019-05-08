@@ -36,8 +36,7 @@
           <div class="card-header">Users</div>
           <div class="card-body bg-light">
           
-          <p class="card-text">useri</p>
-
+          <p class="card-text">list users...</p>
 
           </div>
         </div>          
@@ -53,11 +52,9 @@
              
           </div>
           <div class="card-body bg-light">
+              <div id="messages" class="card-block">
 
-            <div id="messages" class="card-block">
-
-            </div>
-          
+              </div>
           </div>
 
           <div class="card-footer">
@@ -80,6 +77,12 @@
       </div> <!-- /. col-8 -->
 
   </div>
+
+  <div class="row">
+<!--      <h4>testarea</h4> -->
+  </div>
+
+
 </div>
 
 
@@ -88,15 +91,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Welcome to socket chat</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        
+               
       </div>
       <div class="modal-body">
         <p>Pick a username:</p>
         <input type="text" id="username" class="form-control input-sm" placeholder="username..." >
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="setUser">Enter...</button>
+        <button type="button" class="btn btn-primary btn-lg btn-block" id="enter" data-dismiss="modal">Enter...</button>
       </div>
     </div>
   </div>
@@ -121,7 +123,9 @@
         $('#newUser').modal('show');
     });
 
-</script>
+  
+
+  </script>
 
 </body>
 </html>

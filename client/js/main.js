@@ -7,10 +7,10 @@
             var status = element('status');
             var messages = element('messages');
             var textarea = element('textarea');
-            ///var username = element('username');
-            var username = 'anonymous';
-
-         
+            var username = element('username');
+            var enter = element('enter');
+            var message;
+        
             // Set default status
             var statusDefault = status.textContent;
 
@@ -21,7 +21,7 @@
                 if(s !== statusDefault){
                     var delay = setTimeout(function(){
                         setStatus(statusDefault);
-                    }, 3000);
+                    }, 2000);
                 }
             }
 
@@ -35,35 +35,44 @@
                 // Handle Output
                 socket.on('output', function(data){
 
-                    console.log(data);
-
-                    if(data.length){
-                        for(var x = 0;x < data.length;x++){
-                            // Build out message div
-                            var message = document.createElement('div');
-                            message.setAttribute('class', 'chat-message');
-                            message.textContent = data[x].name+": "+data[x].message;
-                            messages.appendChild(message);
-                            messages.insertBefore(message, messages.firstChild);
-                        }
-                    }
+                    message = document.createElement('div');
+                    message.setAttribute('class', 'chat-message');
+                    message.innerHTML = "<span class=\"badge badge-primary\">"+data.name+"&nbsp;:</span>&nbsp;"+data.message;
+                    messages.appendChild(message);
                 });
 
                 // Get Status From Server
                 socket.on('status', function(data){
                     // get message status
                     setStatus((typeof data === 'object')? data.message : data);
-                    //textarea.value = '';
+                    
+                    //  if(data.clear) {
+                    //     textarea.value = '';
+                    //  }
 
                 });
+
+                // Events
+                socket.on('event', function(data){
+                    message = document.createElement('div');
+                    message.setAttribute('class', 'event-message');
+                    message.innerHTML = "<span class=\"badge badge-warning\">"+data.user+data.event+"&nbsp;</span>";
+                    messages.appendChild(message);
+                  
+                });
+
+
 
                 // Handle Input
                 textarea.addEventListener('keydown', function(event){
                     if(event.which === 13 && event.shiftKey == false){
+
+                        let sender = username.value;
+                        sender ? sender : sender='anonymous';
+
                         // Emit to server input
                         socket.emit('input', {
-                            //name:username.value,
-                            name:username,
+                            name:sender,
                             message:textarea.value
                         });
 
@@ -73,6 +82,18 @@
                     }
                 });
 
+
+                  // Handle Chat Clear
+                enter.addEventListener('click', function(){
+
+                    let newusr = username.value;
+                    newusr ? newusr : newusr='anonymous';
+
+                       socket.emit('event', {
+                            user:newusr,
+                            event:' has joined chat.'
+                        });
+                });
 
               
             }

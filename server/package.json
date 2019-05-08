@@ -8,7 +8,7 @@
     "dev": "nodemon server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ivan Nikolic",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
